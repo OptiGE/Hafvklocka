@@ -3,78 +3,110 @@
 <head>
     <title>Häfvklocka</title>
     
-    <style>
-body{
-    background: #fa7030;
-}
-.slidecontainer {
-    width: 100%;
-    position: fixed;
-    bottom: 4%;
-}
+    <!-- BOOTSTRAP BÖS -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
-.slider {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 5vh;
-    border-radius: 5px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-}
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-.slider:hover {
-    opacity: 1;
-}
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 23px;
-    height: 24px;
-    border: 0;
-    background: url('/assets/contrasticon.png');
-    cursor: pointer;
-}
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-.slider::-moz-range-thumb {
-    width: 23px;
-    height: 24px;
-    border: 0;
-    background: url('/assets/contrasticon.png');
-    cursor: pointer;
-}
-
-h1 {
-    color:#EEE;
-    font-size: 10vw;
-    font-family: arial black, verdana, sans-serif;
-}
-
-    </style>
     
+    
+    <style> 
+        
+        /* --- E G E N   C S S --- */
+        body{
+            background: #fa7030;
+        }
+        .slidecontainer {
+            width: 90%;
+            align-self: center;
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 4%;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 5vh;
+            border-radius: 5px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+        .slider:hover {
+            opacity: 1;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 23px;
+            height: 24px;
+            border: 0;
+            background: url('/assets/contrasticon.png');
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 23px;
+            height: 24px;
+            border: 0;
+            background: url('/assets/contrasticon.png');
+            cursor: pointer;
+        }
+
+        h1 {
+            color:#EEE;
+            font-size: 10vw;
+            font-family: arial black, verdana, sans-serif;
+        }
+        
+        
+        /* --- C U S T O M   B O O T S T R A P --- */
+        
+        .btn-outline-light:hover{
+            color: white;
+            background-color: #ffa67c !important;
+        }
+        
+        
+    </style>
 </head>
 
 
 <body>
+    
+    <!-- https://codepen.io/_Billy_Brown/pen/dbJeh Javascript timer -->
 
     <div align="center">
         
         <br><br><br><h1>Häfvklocka</h1><br>
     
-    
+        <!--<button type="button" class="btn btn-outline-light" style="width:30vw; height:5vh; top:50vh;">Häfv</button>-->
     
         <div id="outputx"></div>
         <div id="outputy"></div>
         <div id="outputz"></div>
 
-        <div class="slidecontainer">
-    	   <input type="range" min="0.2" max="35.0" value="17.4" class="slider" id="force_slider">
+        <div class="slidecontainer" align="center">
+            <p id="demo" style="color:#EEE; font-family: arial black, verdana, sans-serif; font-size: 3vw;"></p>
+            <input type="range" min="0.2" max="35.0" value="17.4" class="slider" id="force_slider" align="center">
         </div>
 
-        <div id="demo"></div>
     </div>
 
 

@@ -20,7 +20,7 @@ if (window.DeviceMotionEvent != undefined) {
 		}
 		if(e.acceleration.y > aymax){
 			aymax = e.acceleration.y;
-			document.getElementById("outputy").innerHTML = "Maxxx y: " + aymax;
+			document.getElementById("outputy").innerHTML = "Max y: " + aymax;
 		}
 		if(e.acceleration.z > azmax){
 			azmax = e.acceleration.z;
@@ -32,9 +32,9 @@ if (window.DeviceMotionEvent != undefined) {
 
 var slider = document.getElementById("force_slider");
 var output = document.getElementById("demo");
-output.innerHTML = slider.value; // Display the default slider value
+output.innerHTML =  "Styrka: " + slider.value; // Display the default slider value
 
 // Update the current slider value (each time you drag the slider handle)
 slider.oninput = function() {
-output.innerHTML = this.value;
+output.innerHTML = "Styrka: " + this.value;
 }
