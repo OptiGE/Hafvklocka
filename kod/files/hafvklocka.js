@@ -8,7 +8,7 @@ var time_s = 0;
 var time_m = 0;
 
 var timer_active = false;
-var cooldown_time = 100;
+var cooldown_time = 0;
 
 function resetTimer() {
     time_cs = 0;
@@ -20,15 +20,33 @@ function resetTimer() {
 
 function toggleTimer() {
     
+    //Om cooldown tiden inte har gått ner ännu
+    if(cooldown_time > 0){
+        return;
+    }
+    
+    //Aktivera eller avaktivera timern
     timer_active = !timer_active;
+    
+    //Ändra HTML-texten
     if(document.getElementById("togglebtn").innerHTML == "Start"){
         document.getElementById("togglebtn").innerHTML = "Pause";
     }else{
         document.getElementById("togglebtn").innerHTML = "Start";
     }
+    
+    //Sätt en cooldown
+    cooldown_time = 100;
+    
 }
 
 function timerLoop() {
+    
+    //Räkna ner cooldown time, om det behövs
+    if(cooldown_time > 0){
+        cooldown_time --;
+    }
+    
     
     //Om timern är igång
     if (timer_active){
@@ -45,13 +63,14 @@ function timerLoop() {
             time_s = 0;
             time_m ++;
         }
-
+        
+        //Skriv ut tiden
         document.getElementById("timer_text").innerHTML = time_m + ":" + time_s + ":" + time_cs;
     }
     
 }
 
-// Will execute timerLoop every 0.01 seconds 
+// Exekverar timerLoop vaje centisekund (0.01) 
 var intervalID = window.setInterval(timerLoop, 10);
 
 //------------------------------------------------------------------------------------
