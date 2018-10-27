@@ -15,6 +15,7 @@ function resetTimer() {
     time_s = 0;
     time_m = 0;
     timer_active = false;
+    document.getElementById("togglebtn").innerHTML = "Start";
     document.getElementById("timer_text").innerHTML = "00:00:00";
 }
 
