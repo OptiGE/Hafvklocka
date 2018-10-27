@@ -71,16 +71,34 @@
 
         h1 {
             color:#EEE;
-            font-size: 10vw;
+            font-size: 12vw;
+            font-family: arial black, verdana, sans-serif;
+        }
+        
+        h2 {
+            color:#EEE;
+            font-size: 8vw;
             font-family: arial black, verdana, sans-serif;
         }
         
         
         /* --- C U S T O M   B O O T S T R A P --- */
         
+        
         .btn-outline-light:hover{
             color: white;
             background-color: #ffa67c !important;
+        }
+        
+        .timer{
+            position:fixed; 
+            height:10vh;
+            width:40vw;
+            left:50vw; 
+            top:35vh; 
+            transform: translate(-50%, -50%);
+            border-radius: 15px;
+            background: #ea6020;
         }
         
         
@@ -94,14 +112,28 @@
 
     <div align="center">
         
+        <!-- T I T E L -->
         <br><br><br><h1>Häfvklocka</h1><br>
     
+        
+        
         <!--<button type="button" class="btn btn-outline-light" style="width:30vw; height:5vh; top:50vh;">Häfv</button>-->
     
         <div id="outputx"></div>
         <div id="outputy"></div>
         <div id="outputz"></div>
-
+        
+        
+        <!-- T I M E R -->
+        <div class="timer"><h2 id="timer_text" style="top:50%; transform:translate(0%, 25%);">00:00:00<h2></div>
+            
+        <!-- S T A R T   B U T T O N -->
+        <button id="togglebtn" type="button" class="btn btn-outline-light" onclick="toggleTimer();" style="position:fixed; width:30vw; height:5vh; top:50vh; transform:translate(-50%, 0%)">Start</button> 
+            
+        <!-- R E S E T   B U T T O N -->
+        <button id="resetbtn" type="button" class="btn btn-outline-light" onclick="resetTimer();" style="position:fixed; width:30vw; height:5vh; top:50vh; transform:translate(-50%, 130%)">Reset</button>       
+            
+        <!-- S L I D E R -->
         <div class="slidecontainer" align="center">
             <p id="demo" style="color:#EEE; font-family: arial black, verdana, sans-serif; font-size: 3vw;"></p>
             <input type="range" min="0.2" max="35.0" value="17.4" class="slider" id="force_slider" align="center">
