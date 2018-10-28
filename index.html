@@ -108,21 +108,43 @@
 
 <body>
     
-    <!-- https://codepen.io/_Billy_Brown/pen/dbJeh Javascript timer -->
+    <!-- https://getbootstrap.com/docs/4.0/components/modal/  Modal för kalibrering i början -->
+
+    <!-- C A L I B R A T E   M O D A L  -->
+    <div class="modal fade" id="kalibreringsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="kalibreringsModalLabel">Kalibrering</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal_text">
+                Lägg din mobil (eller dator om du ska va sån) på det bord du ämnar häfva från. Tryck därefter på "Fortsätt" och se till att ingen rör bordet under 5 sekunder. 
+                </div>
+                <div class="modal-footer" id="btn_field">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Stäng fönster</button>
+                    <button type="button" class="btn btn-primary" onclick="startCalibration();">Fortsätt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <!-- KOM IHÅG ATT GÖRA EN "LAPS" FUNKTION OCKSÅ -->
 
     <div align="center">
         
         <!-- T I T E L -->
         <br><br><br><h1 style="position:fixed; left:50vw; top:10vh; transform:translate(-50%, 0%)">Häfvklocka</h1><br>
     
-        
-        
-        <!--<button type="button" class="btn btn-outline-light" style="width:30vw; height:5vh; top:50vh;">Häfv</button>-->
-    
+        <!--
         <div id="outputx"></div>
         <div id="outputy"></div>
-        <div id="outputz"></div>
-        
+        <div id="outputz" style="position:fixed; width:30vw; height:5vh; top:50vh; transform:translate(50%, -150%)"></div>
+        -->
         
         <!-- T I M E R -->
         <div class="timer"><h2 id="timer_text" style="left:50%; top:100%; line-height: 10vh">00:00:00<h2></div>
@@ -131,12 +153,17 @@
         <button id="togglebtn" type="button" class="btn btn-outline-light" onclick="toggleTimer();" style="position:fixed; width:30vw; height:5vh; top:50vh; transform:translate(-50%, 0%)">Start</button> 
             
         <!-- R E S E T   B U T T O N -->
-        <button id="resetbtn" type="button" class="btn btn-outline-light" onclick="resetTimer();" style="position:fixed; width:30vw; height:5vh; top:50vh; transform:translate(-50%, 130%)">Reset</button>       
+        <button id="resetbtn" type="button" class="btn btn-outline-light" onclick="resetTimer();" style="position:fixed; width:30vw; height:5vh; top:50vh; transform:translate(-50%, 130%)">Reset</button> 
+            
+        
+        <!-- C A L I B R A T E   B U T T O N  -->
+        <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#kalibreringsModal" style="position:fixed; width:30vw; height:5vh; top:50vh; transform:translate(-50%, 260%)">Kalibrera</button>
+            
             
         <!-- S L I D E R -->
         <div class="slidecontainer" align="center">
             <p id="demo" style="color:#EEE; font-family: arial black, verdana, sans-serif; font-size: 3vw;"></p>
-            <input type="range" min="0.2" max="35.0" value="17.4" class="slider" id="force_slider" align="center">
+            <input type="range" min="0.2" max="10.0" step="0.1" value="17.4" class="slider" id="force_slider" align="center">
         </div>
 
     </div>

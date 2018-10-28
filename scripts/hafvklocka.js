@@ -1,6 +1,97 @@
+//------------------------------------------------------------------------------------
+
+//------------------------------ K A L I B R E R I N G -------------------------------
 
 //------------------------------------------------------------------------------------
+
+var threshold = 0;
+var seconds_passed = 1;
+var currently_calibrating = false;
+var safety_margin = 2;
+var loopvar;
+
+
+
+function startCalibration(){
+    
+    console.log(seconds_passed);
+    
+    document.getElementById("modal_text").innerHTML = "Backa bort från mobilen och se till så att inget rör bordet...";
+    
+    document.getElementById("btn_field").innerHTML = "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\" onclick=\"resetCalibration();\">Avbryt</button>";
+    
+    //Denna funktion loopas varje sekund
+    function secondCounter() {
+        seconds_passed ++;
+        
+        console.log("Sekunder passerade: " + seconds_passed);
+        
+        // ---- ---- Vänta två sekunder så att användaren hinner gå från bordet
+        if (seconds_passed == 2){
+            //Starta kalibrering
+            //Detta gör så att azmax börjar spelas in nere under window.ondevicemotion
+            currently_calibrating = true;
+            azmax = 0;
+            document.getElementById("modal_text").innerHTML = "Kalibrerar...";
+        }
+        
+        
+        // ---- ---- Ytterligare sex sekunder senare
+        // Avsluta och ställ in värden
+        if (seconds_passed > 10){
+            
+            
+            //När azmax har spelats in i 4 sekunder, sätt den till threshold (occh lägg på marginal)
+            threshold = (azmax * safety_margin);
+            
+            //Sätt minimigränsen på slidern till threshold
+            slider.setAttribute("min", threshold.toString());
+            slider.setAttribute("value", threshold.toString());
+            
+            //EXTREMT FULT SÄTT ATT SÄTTA MAX, OCH DET SKALL LÖSAS
+            threshold *= 10;
+            slider.setAttribute("max", threshold.toString());
+            threshold /= 10;
+            
+            output.innerHTML = "Styrka: " + threshold.toString();
+            
+            //Skriv ut klart!
+            document.getElementById("modal_text").innerHTML = "Klart!";
+            
+            //Lägg in en "Avsluta knapp"
+            document.getElementById("btn_field").innerHTML = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Grymt!</button>'
+            
+            //Avsluta loop
+            clearInterval(loopVar);
+        }
+    }
+    
+    //Loopa secondCounter varje sekund
+    loopVar = setInterval(secondCounter, 1000);
+    
+}
+
+
+
+function resetCalibration(){
+    azmax = 0;
+    clearInterval(loopVar);
+    var seconds_passed = 0;
+    var currently_calibrating = false;
+    
+    document.getElementById("modal_text").innerHTML = "Lägg din mobil (eller dator om du ska va sån) på det bord du ämnar häfva från. Tryck därefter på \"Fortsätt\" och se till att ingen rör bordet under 5 sekunder.";
+    
+    document.getElementById("btn_field").innerHTML = "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Stäng fönster</button><button type=\"button\" class=\"btn btn-primary\" onclick=\"startCalibration();\">Fortsätt</button>";
+    
+    
+    
+}
+
+
+//------------------------------------------------------------------------------------
+
 //------------------------- T I M E R F U N K T I O N E R-----------------------------
+
 //------------------------------------------------------------------------------------
 
 var time_cs = 0;
@@ -75,7 +166,9 @@ function timerLoop() {
 var intervalID = window.setInterval(timerLoop, 10);
 
 //------------------------------------------------------------------------------------
+
 //--------------------------- A C C F U N K T I O N E R-------------------------------
+
 //------------------------------------------------------------------------------------
 
 var axmax = 0;
@@ -103,6 +196,13 @@ if (window.DeviceMotionEvent != undefined) {
 			toggleTimer();
 		}
         
+        if(e.acceleration.z > azmax){
+			azmax = e.acceleration.z;
+            document.getElementById("modal_text").innerHTML = "Kalibrerar..."
+            document.getElementById("modal_text").innerHTML = "Kalibrerar <br> Max z: " + azmax;
+			document.getElementById("outputz").innerHTML = "Max z: " + azmax;
+		}
+        
         
 		//Om den nya rörelsen va större än någon innan
         /*
@@ -113,10 +213,6 @@ if (window.DeviceMotionEvent != undefined) {
 		if(e.acceleration.y > aymax){
 			aymax = e.acceleration.y;
 			document.getElementById("outputy").innerHTML = "Max y: " + aymax;
-		}
-		if(e.acceleration.z > azmax){
-			azmax = e.acceleration.z;
-			document.getElementById("outputz").innerHTML = "Max z: " + azmax;
 		}
         */
 		
