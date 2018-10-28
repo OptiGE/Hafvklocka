@@ -8,13 +8,13 @@ var threshold = 0;
 var seconds_passed = 1;
 var currently_calibrating = false;
 var safety_margin = 2;
-var loopvar;
+var loop_var;
 
 
 
 function startCalibration(){
     
-    console.log(seconds_passed);
+    var seconds_passed = 0;
     
     document.getElementById("modal_text").innerHTML = "Backa bort från mobilen och se till så att inget rör bordet...";
     
@@ -24,35 +24,39 @@ function startCalibration(){
     function secondCounter() {
         seconds_passed ++;
         
-        console.log("Sekunder passerade: " + seconds_passed);
+        console.log(seconds_passed);
         
         // ---- ---- Vänta två sekunder så att användaren hinner gå från bordet
-        if (seconds_passed == 2){
+        if (seconds_passed == 3){
+            console.log("3 sekunder");
+            
             //Starta kalibrering
-            //Detta gör så att azmax börjar spelas in nere under window.ondevicemotion
+            //Detta gör så att azmax börjar spelas in nere under window.ondevicemotion ------------------- Notera att det är först här axmax börjar spelas in, och då skrivs modalen ut. 
             currently_calibrating = true;
             azmax = 0;
-            document.getElementById("modal_text").innerHTML = "Kalibrerar...";
+            document.getElementById("modal_text").innerHTML = "Kalibrerar <br> Max movement: " + azmax;
         }
         
         
         // ---- ---- Ytterligare sex sekunder senare
         // Avsluta och ställ in värden
-        if (seconds_passed > 10){
+        if (seconds_passed > 8){
+            console.log("9 sekunder");
             
-            
-            //När azmax har spelats in i 4 sekunder, sätt den till threshold (occh lägg på marginal)
+            //När azmax har spelats in i 7 sekunder, sätt den till threshold (occh lägg på marginal)
             threshold = (azmax * safety_margin);
             
             //Sätt minimigränsen på slidern till threshold
             slider.setAttribute("min", threshold.toString());
             slider.setAttribute("value", threshold.toString());
+            slider.setAttribute("step", threshold.toString());
             
             //EXTREMT FULT SÄTT ATT SÄTTA MAX, OCH DET SKALL LÖSAS
-            threshold *= 10;
+            threshold *= 40;
             slider.setAttribute("max", threshold.toString());
-            threshold /= 10;
+            threshold /= 40;
             
+            //Skriv ovanför slidern
             output.innerHTML = "Styrka: " + threshold.toString();
             
             //Skriv ut klart!
@@ -63,6 +67,9 @@ function startCalibration(){
             
             //Avsluta loop
             clearInterval(loopVar);
+            
+            //Stäng av klibreringen i window.Ondevicemotion
+            currently_calibrating = false;
         }
     }
     
@@ -74,13 +81,20 @@ function startCalibration(){
 
 
 function resetCalibration(){
+    
+    console.log("Resetting calibration");
+    
+    //Återställ rörelsevärdet
     azmax = 0;
-    clearInterval(loopVar);
-    var seconds_passed = 0;
+    
+    //Sluta loopa secondCounter
+    clearInterval(loop_var);
+    
+    //Avsluta kalibreringen
     var currently_calibrating = false;
     
+    //Ställ in den ursprungliga HTML:en i Modalen
     document.getElementById("modal_text").innerHTML = "Lägg din mobil (eller dator om du ska va sån) på det bord du ämnar häfva från. Tryck därefter på \"Fortsätt\" och se till att ingen rör bordet under 5 sekunder.";
-    
     document.getElementById("btn_field").innerHTML = "<button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Stäng fönster</button><button type=\"button\" class=\"btn btn-primary\" onclick=\"startCalibration();\">Fortsätt</button>";
     
     
@@ -196,11 +210,12 @@ if (window.DeviceMotionEvent != undefined) {
 			toggleTimer();
 		}
         
-        if(e.acceleration.z > azmax){
+        
+        if(currently_calibrating && e.acceleration.z > azmax){
 			azmax = e.acceleration.z;
-            document.getElementById("modal_text").innerHTML = "Kalibrerar..."
-            document.getElementById("modal_text").innerHTML = "Kalibrerar <br> Max z: " + azmax;
-			document.getElementById("outputz").innerHTML = "Max z: " + azmax;
+            //document.getElementById("modal_text").innerHTML = "Kalibrerar..."
+            document.getElementById("modal_text").innerHTML = "Kalibrerar <br> Max movement: " + azmax;
+			//document.getElementById("outputz").innerHTML = "Max z: " + azmax;
 		}
         
         
