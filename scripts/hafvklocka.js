@@ -115,6 +115,8 @@ var time_m = 0;
 var timer_active = false;
 var cooldown_time = 0;
 
+var output_string = "";
+
 function resetTimer() {
     time_cs = 0;
     time_s = 0;
@@ -170,10 +172,22 @@ function timerLoop() {
             time_m ++;
         }
         
-        //Skriv ut tiden
-        document.getElementById("timer_text").innerHTML = time_m + ":" + time_s + ":" + time_cs;
+        //      ------      Skriv ut tiden      ------      //
+        
+        //Lägg på nolla om de behövs
+        
+        
+        document.getElementById("timer_text").innerHTML = addZero(time_m) + ":" + addZero(time_s) + ":" + addZero(time_cs);
     }
     
+}
+
+function addZero(time){
+    if(time < 10){
+        return "0" + time;
+    }else{
+        return time.toString();
+    }
 }
 
 // Exekverar timerLoop vaje centisekund (0.01) 
