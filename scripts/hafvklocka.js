@@ -120,7 +120,7 @@ function resetTimer() {
     time_s = 0;
     time_m = 0;
     timer_active = false;
-    document.getElementById("togglebtn").innerHTML = "Start";
+    document.getElementById("toggle_btn").innerHTML = "Start";
     document.getElementById("timer_text").innerHTML = "00:00:00";
 }
 
@@ -135,10 +135,10 @@ function toggleTimer() {
     timer_active = !timer_active;
     
     //Ändra HTML-texten
-    if(document.getElementById("togglebtn").innerHTML == "Start"){
-        document.getElementById("togglebtn").innerHTML = "Pause";
+    if(document.getElementById("toggle_btn").innerHTML == "Start"){
+        document.getElementById("toggle_btn").innerHTML = "Pause";
     }else{
-        document.getElementById("togglebtn").innerHTML = "Start";
+        document.getElementById("toggle_btn").innerHTML = "Start";
     }
     
     //Sätt en cooldown

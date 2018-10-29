@@ -79,6 +79,7 @@
             color:#EEE;
             font-size: 8vw;
             font-family: arial black, verdana, sans-serif;
+            line-height: 10vh;
         }
         
         
@@ -99,6 +100,38 @@
             transform: translate(-50%, -50%);
             border-radius: 15px;
             background: #ea6020;
+        }
+        
+        /* -- För liggande skärmar -- */
+        @media (min-width: 500px) and (orientation:landscape) {
+            .timer{
+                transform: translate(-50%, 30%);
+                height:10vh;
+            }
+            
+            h1 {
+            color:#EEE;
+            font-size: 9vw;
+            }
+            
+            h2{
+                line-height: 10vh;
+                font-size: 6vw;
+            }
+            
+            #toggle_btn { 
+                transform:translate(-50%, 150%) !important;
+            }
+            
+            #reset_btn {
+                transform:translate(-50%, 280%) !important;
+            }
+            
+            #calibrate_btn {
+                transform:translate(-50%, 410%) !important;
+            }
+            
+            
         }
         
         
@@ -147,17 +180,17 @@
         -->
         
         <!-- T I M E R -->
-        <div class="timer"><h2 id="timer_text" style="left:50%; top:100%; line-height: 10vh">00:00:00<h2></div>
+        <div class="timer"><h2 id="timer_text" style="left:50%; top:100%;">00:00:00<h2></div>
             
         <!-- S T A R T   B U T T O N -->
-        <button id="togglebtn" type="button" class="btn btn-outline-light" onclick="toggleTimer();" style="position:fixed; width:30vw; height:5vh; top:50vh; transform:translate(-50%, 0%)">Start</button> 
+        <button id="toggle_btn" type="button" class="btn btn-outline-light" onclick="toggleTimer();" style="position:fixed; width:30vw; height:5vh; top:50vh; transform:translate(-50%, 0%)">Start</button> 
             
         <!-- R E S E T   B U T T O N -->
-        <button id="resetbtn" type="button" class="btn btn-outline-light" onclick="resetTimer();" style="position:fixed; width:30vw; height:5vh; top:50vh; transform:translate(-50%, 130%)">Reset</button> 
+        <button id="reset_btn" type="button" class="btn btn-outline-light" onclick="resetTimer();" style="position:fixed; width:30vw; height:5vh; top:50vh; transform:translate(-50%, 130%)">Reset</button> 
             
         
         <!-- C A L I B R A T E   B U T T O N  -->
-        <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#kalibreringsModal" onclick="resetCalibration();" style="position:fixed; width:30vw; height:5vh; top:50vh; transform:translate(-50%, 260%)">Kalibrera</button>
+        <button id="calibrate_btn" type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#kalibreringsModal" onclick="resetCalibration();" style="position:fixed; width:30vw; height:5vh; top:50vh; transform:translate(-50%, 260%)">Kalibrera</button>
             
             
         <!-- S L I D E R -->
