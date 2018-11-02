@@ -96,7 +96,7 @@
             height:10vh;
             width:40vw;
             left:50vw; 
-            top:35vh; 
+            top:30vh; 
             transform: translate(-50%, -50%);
             border-radius: 15px;
             background: #ea6020;
@@ -121,6 +121,7 @@
             
             #toggle_btn { 
                 transform:translate(-50%, 150%) !important;
+                width: 8vw;
             }
             
             #reset_btn {
@@ -131,7 +132,30 @@
                 transform:translate(-50%, 410%) !important;
             }
             
+            #laps {
+                transform:translate(116.66%, 130%) !important; /* För att sätta i mitten: ((50/l) - 1,5l)/a     där l = längd på en låda och a = antal lådor*/
+            }
             
+            .lapbox{
+            width: 10vw !important;
+        }
+            
+            
+        }
+        
+        .lapbox{
+            border-radius: 5px;
+            border: thin;
+            border:1px solid #EEE;
+            width: 18vw;
+            padding: 2px;
+            float: left; 
+            clear: none;
+            color: #EEE;
+        }
+        
+        #laps {
+                transform:translate(44.855967078%, 0%); /* För att sätta i mitten: ((50/l) - 1,5l)/a     där l = längd på en låda och a = antal lådor*/
         }
         
         
@@ -191,6 +215,17 @@
         
         <!-- C A L I B R A T E   B U T T O N  -->
         <button id="calibrate_btn" type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#kalibreringsModal" onclick="resetCalibration();" style="position:fixed; width:30vw; height:5vh; top:50vh; transform:translate(-50%, 260%)">Kalibrera</button>
+            
+            
+        <!-- L A P   T I M E S -->
+        <div id="laps" style="position:fixed; top:40vh; background: #ea6020; border-radius: 6px;">
+            <div style="align center; color: #EEE;">Laps</div>
+            <div id="lap1" class="lapbox">00:00:00</div>
+            <div id="lap2" class="lapbox">00:00:00</div>
+            <div id="lap3" class="lapbox">00:00:00</div>
+        </div>
+            
+            
             
             
         <!-- S L I D E R -->

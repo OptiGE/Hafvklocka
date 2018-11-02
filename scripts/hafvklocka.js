@@ -117,12 +117,21 @@ var cooldown_time = 0;
 
 var output_string = "";
 
+var laps = ["00:00:00","00:00:00","00:00:00"];
+
 function resetTimer() {
     time_cs = 0;
     time_s = 0;
     time_m = 0;
     timer_active = false;
     document.getElementById("toggle_btn").innerHTML = "Start";
+    
+    //Om den nuvarande tiden inte är 00:00:00
+    if(!(document.getElementById("timer_text").innerHTML == "00:00:00")){
+        //Lägg till nuvarande tid i som lap
+        addLap(document.getElementById("timer_text").innerHTML);
+    }
+    
     document.getElementById("timer_text").innerHTML = "00:00:00";
 }
 
@@ -190,8 +199,26 @@ function addZero(time){
     }
 }
 
+function addLap(time){
+    //Förskjut hela arrayen ett steg åt vänster
+    //Börja loopen längst åt höger och gå fram till början
+    for(i = (laps.length - 1); i > 0; i--){
+        laps[i] = laps[i - 1];
+    }
+    //Nu är första objektet duplicerat, så vi skriver över det första med vårt nya värde
+    laps[0] = time;
+    
+    document.getElementById("lap1").innerHTML = laps[0];
+    document.getElementById("lap2").innerHTML = laps[1];
+    document.getElementById("lap3").innerHTML = laps[2];
+} 
+
 // Exekverar timerLoop vaje centisekund (0.01) 
 var intervalID = window.setInterval(timerLoop, 10);
+
+
+
+
 
 //------------------------------------------------------------------------------------
 
